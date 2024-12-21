@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
 const Footer = () => {
   return (
-    <p className='footer'>© 2021 - Pizzería Mamma Mia! - Todos los derechos reservados</p>
-  )
-}
+    <p className="footer">
+      © 2024 - Pizzería Mamma Mia! - Francisco Muñoz Jara ADL - Todos los
+      derechos reservados
+    </p>
+  );
+};
 
-export default Footer
+export default Footer;

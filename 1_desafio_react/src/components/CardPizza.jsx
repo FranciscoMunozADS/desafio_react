@@ -25,5 +25,4 @@ const CardPizza = ({ img, name, ingredients, price }) => {
 
 export default CardPizza;
 
-
 // intento con boostrap react (casi me mori)
