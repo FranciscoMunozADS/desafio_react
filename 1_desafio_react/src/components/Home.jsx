@@ -1,6 +1,7 @@
 import React from "react";
 import CardPizza from "./CardPizza";
 import Header from "./Header";
+import { pizzas } from "../assets/js/pizzas";
 
 const Home = () => {
   return (
@@ -9,8 +10,27 @@ const Home = () => {
       <section>
         <div className="container mt-5">
           <div className="row">
-            <div className="col">
-              <CardPizza
+            {pizzas.map((pizza) => (
+              <div className="col-md-4 mb-4" key={pizza.id}>
+                <CardPizza
+                  name={pizza.name}
+                  price={pizza.price}
+                  ingredients={pizza.ingredients}
+                  img={pizza.img}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Home;
+
+{
+  /* <CardPizza
                 name="Napolitana"
                 price={5950}
                 ingredients={["mozzarella", "tomates", "jamón", "orégano"]}
@@ -43,12 +63,5 @@ const Home = () => {
                 buttonText="Comprar"
                 buttonLink="#"
               />
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-};
-
-export default Home;
+            </div> */
+}
