@@ -11,14 +11,14 @@ const CardPizza = ({ img, name, ingredients, price }) => {
           <Card.Subtitle className="mb-2 text-muted text-center">
             Ingredientes
           </Card.Subtitle>
-          <Card.Text>
+          <div> {/* reemplazo de cardtext por div por error en la consola de estructura html */}
             {/* 🍕{ingredients.join(", ")} */}
             <ul>
               {ingredients.map((ingredient, index) => (
                 <li key={index}>🍕 {ingredient}</li>
               ))}
             </ul>
-          </Card.Text>
+          </div>
           <Card.Title className="text-center">Precio ${price}</Card.Title>
           <div className="d-flex justify-content-between mt-3">
             <Button variant="outline-dark">ver más 👀</Button>

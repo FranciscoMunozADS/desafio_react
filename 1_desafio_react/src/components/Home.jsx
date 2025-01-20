@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardPizza from "./CardPizza";
 import Header from "./Header";
 import { pizzas } from "../assets/js/pizzas";
 
 const Home = () => {
+  /* guardar con useState la api de pizzas */
+  const [pizzas, setPizzas] = useState([]);
+
+  /* consultar api */
+
+  const getPizzas = async () => {
+    try {
+      // url del endpoint
+      const url = "http://localhost:5000/api/pizzas";
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      setPizzas(data);
+    } catch (error) {
+      console.error("Error fetching pizzas:", error);
+    }
+  };
+
+  useEffect(() => {
+    getPizzas();
+  }, []);
+
   return (
     <>
       <Header />
