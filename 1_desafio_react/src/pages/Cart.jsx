@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { pizzaCart } from "../assets/js/pizzas"; 
+import { pizzaCart } from "../assets/js/pizzas";
 
 /* useState para manejar el estado del cart */
 
 const Cart = () => {
-  const [cart, setCart] = useState(pizzaCart); 
+  const [cart, setCart] = useState(pizzaCart);
 
-/* Función para aumentar la cantidad */
+  /* Función para aumentar la cantidad */
   const increaseQuantity = (id) => {
     const updatedCart = cart.map((pizza) => {
       if (pizza.id === id) {
@@ -17,7 +17,7 @@ const Cart = () => {
     setCart(updatedCart);
   };
 
-/* Función para disminuir */
+  /* Función para disminuir */
   const decreaseQuantity = (id) => {
     const updatedCart = cart.map((pizza) => {
       if (pizza.id === id && pizza.count > 0) {
@@ -28,13 +28,13 @@ const Cart = () => {
     setCart(updatedCart);
   };
 
-/*   Función para eliminar una pizza cuando la cantidad es 0 */
+  /*   Función para eliminar una pizza cuando la cantidad es 0 */
   const removePizza = (id) => {
     const updatedCart = cart.filter((pizza) => pizza.id !== id);
     setCart(updatedCart);
   };
 
- /*  Calcular total */
+  /*  Calcular total */
   const total = cart.reduce((acc, pizza) => acc + pizza.price * pizza.count, 0); // REDUCE es una función estandar de js
 
   return (

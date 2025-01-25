@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [signupData, setSignupData] = useState({
@@ -107,6 +108,8 @@ const Register = () => {
         <button type="submit" className="btn btn-primary btn-lg w-25">
           Crear cuenta
         </button>
+        <p className="mt-5">Ya tienes una cuenta?</p>
+        <Link to="/login">Inicia Sesión</Link>
       </form>
     </>
   );

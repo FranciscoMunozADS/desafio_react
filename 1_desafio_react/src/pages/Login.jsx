@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [signinData, setSigninData] = useState({
@@ -74,11 +75,12 @@ const Login = () => {
             onChange={updateSigninData}
           />
         </div>
-
         <div className="mb-3 form-check"></div>
         <button type="submit" className="btn btn-primary btn-lg w-25">
           Ingresar
         </button>
+        <p className="mt-5">No tienes una cuenta?</p>
+        <Link to="/register">Regístrate</Link>
       </form>
     </>
   );

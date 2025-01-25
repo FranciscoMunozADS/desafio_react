@@ -9,7 +9,7 @@ const Pizza = () => {
       try {
         const response = await fetch(URL);
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         setPizza(data);
       } catch (error) {
         console.error("Error fetching pizza:", error);
@@ -43,9 +43,7 @@ const Pizza = () => {
               <h5 className="text-center">Ingredientes:</h5>
               <ul className="list-unstyled">
                 {pizza.ingredients.map((ingredient, index) => (
-                  <li key={index}>
-                    🍕 {ingredient}
-                  </li>
+                  <li key={index}>🍕 {ingredient}</li>
                 ))}
               </ul>
               <div className="text-center mt-4">

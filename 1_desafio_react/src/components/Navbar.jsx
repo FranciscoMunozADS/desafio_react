@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const total = 25000;
@@ -7,7 +8,9 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <h2 className="navbar-brand">Pizzería Mammá Mia</h2>
+        <Link to="/" className="navbar-brand">
+          Pizzería Mammá Mia
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -23,7 +26,9 @@ const Navbar = () => {
           <ul className="navbar-nav me-auto gap-3">
             {/* home */}
             <li className="nav-item">
-              <button className="btn btn-outline-light">🍕 Home</button>
+              <Link to="/" className="btn btn-outline-light">
+                🍕 Home
+              </Link>
             </li>
 
             {/* token */}
@@ -31,7 +36,9 @@ const Navbar = () => {
             {token ? (
               <>
                 <li className="nav-item">
-                  <button className="btn btn-outline-light">🔓 Profile</button>
+                  <Link to="/profile" className="btn btn-outline-light">
+                    🔓 Profile
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <button className="btn btn-outline-light">🔒 Logout</button>
@@ -40,10 +47,14 @@ const Navbar = () => {
             ) : (
               <>
                 <li className="nav-item">
-                  <button className="btn btn-outline-light">🔐 Login</button>
+                  <Link to="/login" className="btn btn-outline-light">
+                    🔐 Login
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <button className="btn btn-outline-light">🔐 Register</button>
+                  <Link to="/register" className="btn btn-outline-light">
+                    🔐 Register
+                  </Link>
                 </li>
               </>
             )}
@@ -51,9 +62,9 @@ const Navbar = () => {
           {/* total */}
           <ul className="navbar-nav">
             <li className="nav-item">
-              <button className="btn btn-outline-primary nav-link">
+              <Link to="/cart" className="btn btn-outline-primary nav-link">
                 🛒 Total: $ {total}
-              </button>
+              </Link>
             </li>
           </ul>
         </div>
