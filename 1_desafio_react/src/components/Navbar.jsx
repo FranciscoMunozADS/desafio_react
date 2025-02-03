@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+
+// Sustitucíon de total estatico por totalPrice del CartContext
 
 const Navbar = () => {
-  const total = 25000;
+  const { totalPrice } = useCart();
   const token = false;
 
   return (
@@ -63,7 +66,7 @@ const Navbar = () => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link to="/cart" className="btn btn-outline-primary nav-link">
-                🛒 Total: $ {total}
+                🛒 Total: $ {totalPrice}
               </Link>
             </li>
           </ul>

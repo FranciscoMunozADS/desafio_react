@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-const CardPizza = ({ img, name, ingredients, price }) => {
+const CardPizza = ({ img, name, ingredients, price, onAddToCart }) => {
   return (
     <>
       <Card style={{ width: "20rem" }}>
@@ -22,7 +22,7 @@ const CardPizza = ({ img, name, ingredients, price }) => {
           <Card.Title className="text-center">Precio ${price}</Card.Title>
           <div className="d-flex justify-content-between mt-3">
             <Button variant="outline-dark">ver más 👀</Button>
-            <Button variant="dark"> 🛒 Añadir</Button>
+            <Button variant="dark" onClick={onAddToCart}> 🛒 Añadir</Button>
           </div>
         </Card.Body>
       </Card>

@@ -1,41 +1,11 @@
-import React, { useState } from "react";
-import { pizzaCart } from "../assets/js/pizzas";
+import { useCart } from "../context/CartContext";
 
-/* useState para manejar el estado del cart */
+/* se usarán las funciones directamente desde el CartContext */
 
 const Cart = () => {
-  const [cart, setCart] = useState(pizzaCart);
+  const { cart, increaseQuantity, decreaseQuantity, removePizza, totalPrice } = useCart();
 
-  /* Función para aumentar la cantidad */
-  const increaseQuantity = (id) => {
-    const updatedCart = cart.map((pizza) => {
-      if (pizza.id === id) {
-        return { ...pizza, count: pizza.count + 1 };
-      }
-      return pizza;
-    });
-    setCart(updatedCart);
-  };
 
-  /* Función para disminuir */
-  const decreaseQuantity = (id) => {
-    const updatedCart = cart.map((pizza) => {
-      if (pizza.id === id && pizza.count > 0) {
-        return { ...pizza, count: pizza.count - 1 };
-      }
-      return pizza;
-    });
-    setCart(updatedCart);
-  };
-
-  /*   Función para eliminar una pizza cuando la cantidad es 0 */
-  const removePizza = (id) => {
-    const updatedCart = cart.filter((pizza) => pizza.id !== id);
-    setCart(updatedCart);
-  };
-
-  /*  Calcular total */
-  const total = cart.reduce((acc, pizza) => acc + pizza.price * pizza.count, 0); // REDUCE es una función estandar de js
 
   return (
     <div className="container mt-3 p-2 border border-black">
@@ -70,7 +40,7 @@ const Cart = () => {
                 >
                   +
                 </button>
-                {pizza.count === 0 && (
+                {pizza.count >= 0 && (
                   <button
                     onClick={() => removePizza(pizza.id)}
                     className="btn btn-warning ms-2"
@@ -88,7 +58,7 @@ const Cart = () => {
 
       {cart.length > 0 && (
         <div className="total mt-4">
-          <h4>Total: ${total}</h4>
+          <h4>Total: ${totalPrice}</h4>
         </div>
       )}
 

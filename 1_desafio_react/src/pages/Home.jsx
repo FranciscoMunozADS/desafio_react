@@ -1,30 +1,12 @@
 import React, { useEffect, useState } from "react";
 import CardPizza from "../components/CardPizza";
 import Header from "../components/Header";
-import { pizzas } from "../assets/js/pizzas";
+import { useCart } from "../context/CartContext";
+import { usePizzas } from "../context/PizzaContext";
 
 const Home = () => {
-  /* guardar con useState la api de pizzas */
-  const [pizzas, setPizzas] = useState([]);
-
-  /* consultar api */
-
-  const getPizzas = async () => {
-    try {
-      // url del endpoint
-      const url = "http://localhost:5000/api/pizzas";
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data);
-      setPizzas(data);
-    } catch (error) {
-      console.error("Error fetching pizzas:", error);
-    }
-  };
-
-  useEffect(() => {
-    getPizzas();
-  }, []);
+  const { pizzas } = usePizzas(); // obtiene pizzas
+  const { addToCart } = useCart(); // obtiene funcion addToCart
 
   return (
     <>
@@ -39,6 +21,7 @@ const Home = () => {
                   price={pizza.price}
                   ingredients={pizza.ingredients}
                   img={pizza.img}
+                  onAddToCart={() => addToCart (pizza)} // paso la funcion como prop a cardpizza
                 />
               </div>
             ))}
