@@ -23,8 +23,9 @@ export const PizzaProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
+  useEffect(() => { // recuerda useEffect es para que cargue al iniciar la página
     getPizzas();
+    console.log("Pizzas cargadas en el contexto:", pizzas);
   }, []);
 
   return (

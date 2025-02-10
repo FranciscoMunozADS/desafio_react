@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 // Sustitucíon de total estatico por totalPrice del CartContext
 
 const Navbar = () => {
   const { totalPrice } = useCart();
-  const token = false;
+  const { token, logout } = useContext(UserContext);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -44,7 +45,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <button className="btn btn-outline-light">🔒 Logout</button>
+                  <button onClick={logout} className="btn btn-outline-light mb-3">🔒 Logout</button>
                 </li>
               </>
             ) : (
@@ -55,7 +56,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/register" className="btn btn-outline-light">
+                  <Link to="/register" className="btn btn-outline-light mb-3">
                     🔐 Register
                   </Link>
                 </li>

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Profile = () => {
+  const { logout } = useContext(UserContext);
   const email = "usuario@correo.com";
   return (
     <div className="container mt-5">
@@ -13,8 +15,7 @@ const Profile = () => {
           <div className="d-flex justify-content-center">
             <button
               className="mt-3 btn btn-danger btn-lg"
-              onClick={() => alert("Cerrar sesión aún no implementado")}
-            >
+              onClick={logout}>
               Cerrar sesión
             </button>
           </div>

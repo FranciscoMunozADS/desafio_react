@@ -76,7 +76,7 @@ const Login = () => {
           />
         </div>
         <div className="mb-3 form-check"></div>
-        <button type="submit" className="btn btn-primary btn-lg w-25">
+        <button type="submit" className="btn btn-primary btn-lg">
           Ingresar
         </button>
         <p className="mt-5">No tienes una cuenta?</p>

@@ -1,25 +1,22 @@
-import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { usePizzas } from "../context/PizzaContext";
+import { useCart } from "../context/CartContext";
 
 const Pizza = () => {
-  const [pizza, setPizza] = useState(null);
-  const URL = "http://localhost:5000/api/pizzas/p001";
+  const { id } = useParams();
+  const { pizzas } = usePizzas();
+  const { addToCart } = useCart();
 
-  useEffect(() => {
-    const fetchPizza = async () => {
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        console.log(data);
-        setPizza(data);
-      } catch (error) {
-        console.error("Error fetching pizza:", error);
-      }
-    };
-    fetchPizza();
-  }, []);
+  // .find para buscar la pizza por id en el contexto
+  const pizza = pizzas.find((p) => p.id === id);
+
+  // depuracion
+  console.log("ID obtenido de la URL:", id);
+  console.log("Pizzas en el contexto:", pizzas);
+  console.log("Pizza encontrada:", pizza);
 
   if (!pizza) {
-    return <p>Cargando...</p>;
+    return <p className="text-center mt-5">Cargando...</p>;
   }
 
   return (
@@ -47,7 +44,9 @@ const Pizza = () => {
                 ))}
               </ul>
               <div className="text-center mt-4">
-                <button className="btn btn-dark">Añadir al carrito</button>
+                <button className="btn btn-dark" onClick={() => addToCart(pizza)}>
+                  🛒 Añadir al carrito
+                </button>
               </div>
             </div>
           </div>

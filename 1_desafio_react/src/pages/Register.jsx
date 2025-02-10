@@ -105,7 +105,7 @@ const Register = () => {
           />
         </div>
         <div className="mb-3 form-check"></div>
-        <button type="submit" className="btn btn-primary btn-lg w-25">
+        <button type="submit" className="btn btn-primary btn-lg">
           Crear cuenta
         </button>
         <p className="mt-5">Ya tienes una cuenta?</p>
