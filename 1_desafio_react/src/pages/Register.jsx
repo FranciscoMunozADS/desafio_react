@@ -1,7 +1,11 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { register, token } = useContext(UserContext);
   const [signupData, setSignupData] = useState({
     email: "",
     password: "",
@@ -20,7 +24,7 @@ const Register = () => {
 
   /* Botón (submit) */
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // de esta manera no se actualiza la página (default de submit)
 
     // Validaciones dentro del botón
@@ -42,14 +46,26 @@ const Register = () => {
       return;
     }
 
-    alert("Datos enviados correctamente.");
-    console.log("Datos enviados correctamente:", signupData);
+    // método register desde el contexto
+    try {
+      await register(signupData.email, signupData.password);
+      navigate("/profile");
+    } catch (error) {
+      alert("Error al registrar.");
+    }
+
     setSignupData({
       email: "",
       password: "",
       confirmPassword: "",
     });
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/profile");
+    }
+  }, [token, navigate]);
 
   return (
     <>

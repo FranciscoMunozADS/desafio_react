@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { login, token } = useContext(UserContext);
   const [signinData, setSigninData] = useState({
     email: "",
     password: "",
@@ -18,7 +21,7 @@ const Login = () => {
 
   /* botón (submit) */
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     //Validaciones dentro del botón
@@ -32,13 +35,26 @@ const Login = () => {
       return;
     }
 
-    alert("Datos correctos.");
-    console.log("Datos correctos:", signinData);
+    // método login desde el contexto
+    try {
+      await login(signinData.email, signinData.password);
+      navigate("/profile");
+    } catch (error) {
+      alert("Error en inicio de sesión, verifica tus datos.");
+    }
+
     setSigninData({
       email: "",
       password: "",
     });
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/profile");
+    }
+  }, [token, navigate]);
+
   return (
     <>
       <form

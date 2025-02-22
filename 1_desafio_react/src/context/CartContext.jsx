@@ -48,6 +48,12 @@ export const CartProvider = ({ children }) => {
     setCart((prevCart) => prevCart.filter((pizza) => pizza.id !== id));
   };
 
+  // vaciar carrito
+
+  const clearCart = () => {
+    setCart([]);
+  }
+
   // Calcular total
   const totalPrice = cart.reduce(
     (acc, pizza) => acc + pizza.price * pizza.count,
@@ -62,6 +68,7 @@ export const CartProvider = ({ children }) => {
         increaseQuantity,
         decreaseQuantity,
         removePizza,
+        clearCart,
         totalPrice,
       }}
     >

@@ -1,12 +1,40 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext"; 
 import { useCart } from "../context/CartContext";
 
 /* se usarán las funciones directamente desde el CartContext */
 
 const Cart = () => {
-  const { cart, increaseQuantity, decreaseQuantity, removePizza, totalPrice } = useCart();
+  const { cart, increaseQuantity, decreaseQuantity, removePizza, totalPrice, clearCart } = useCart();
   const { token } = useContext(UserContext); // token
+  const [successMessage, setSuccessMessage] = useState(""); // estado para mensaje
+
+  // Manejo de pago
+
+  const handleCheckout = async () => {
+    setSuccessMessage(""); // limpia mensaje anterior
+    if (!token) return; // para evitar ejecutar sin autenticación
+
+    try {
+      const response = await fetch ("http://localhost:5000/api/checkouts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, },
+        body: JSON.stringify({ cart }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setSuccessMessage("✅ Pedido realizado con éxito. Gracias por tu compra!");
+        clearCart();
+      } else {
+        setSuccessMessage("❌ Hubo un problema con el pago. Inténtalo nuevamente.");
+      }
+    } catch (error) {
+      setSuccessMessage("❌ Error de conexión. Intenta más tarde.");
+      console.error("Error en el checkout:", error);
+    }
+  };
 
 
   return (
@@ -65,8 +93,11 @@ const Cart = () => {
       )}
 
       <div className="text-center mt-4">
-        <button className="btn btn-dark" disabled={!token}>{token ? "Pagar" : "Inicia sesión para pagar"}</button>
+        <button className="btn btn-dark" disabled={!token || cart.length === 0 || totalPrice === 0} onClick={handleCheckout}>
+          {token ? "Pagar" : "Inicia sesión para pagar"}
+        </button>
       </div>
+      {successMessage && <p className="text-center mt-3">{successMessage}</p>}
     </div>
   );
 };
